@@ -1,7 +1,7 @@
 const KJUR = require('jsrsasign')
 const { ZoomConfig } = require('../config/zoom.config')
 
-const createToken = async (meetingNumber, role = 1) => {
+const createToken = (meetingNumber, role = 1) => {
     try {
         const iat = Math.round(new Date().getTime() / 1000) - 30
         const exp = iat + 60 * 60 * 2
