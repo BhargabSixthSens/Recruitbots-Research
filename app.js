@@ -28,8 +28,10 @@ app.use('/users', usersRouter);
 
 const { websocketRouter } = require('./routes/websocket');
 const { zoomRouter } = require('./routes/zoom');
+const { awsRouter } = require('./routes/aws');
 app.use('/ws', websocketRouter);
 app.use('/zoom', zoomRouter);
+app.use('/aws', awsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

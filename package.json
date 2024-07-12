@@ -7,6 +7,8 @@
     "dev": "nodemon app.js"
   },
   "dependencies": {
+    "amazon-chime-sdk-js": "^3.22.0",
+    "aws-sdk": "^2.1658.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.4.5",
@@ -15,7 +17,8 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "jsrsasign": "^11.1.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
