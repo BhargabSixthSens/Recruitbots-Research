@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "py": "nodemon ./python/server.py"
   },
   "dependencies": {
     "amazon-chime-sdk-js": "^3.22.0",
