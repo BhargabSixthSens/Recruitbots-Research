@@ -22,7 +22,7 @@ def hello_world():
 @app.route('/bot-join')
 def join_bot():
     meetingURL = 'https://bhargab-sixthsens.daily.co/recruitbots-meet'
-    client.join(meeting_url=meetingURL, meeting_token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyIjoicmVjcnVpdGJvdHMtbWVldCIsImQiOiJiMzQxNmQwMC05MDQxLTQ3ZjctYTA1OS0yZTZhY2UxZGFlNjMiLCJpYXQiOjE3MjEyMDE4NDR9.3q6XXiLH9kXAtV5B69mNtaIfCnZcwqRgM1ATG8xq61I")
+    client.join(meeting_url=meetingURL, meeting_token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyIjoicmVjcnVpdGJvdHMtbWVldCIsImQiOiJiMzQxNmQwMC05MDQxLTQ3ZjctYTA1OS0yZTZhY2UxZGFlNjMiLCJpYXQiOjE3MjEyMDE4NDR9.3q6XXiLH9kXAtV5B69mNtaIfCnZcwqRgM1ATG8xq61I", )
     client.set_user_name("RecruitsBots")
     return 'Bot Joined'
 
