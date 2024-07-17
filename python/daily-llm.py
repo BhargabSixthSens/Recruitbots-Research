@@ -219,7 +219,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     url = args.url or os.getenv("DAILY_URL")
-    bot_name = args.bot_name or "Storybot"
+    bot_name = args.bot_name or "RecruitBots"
     token = args.token or None
 
     app = DailyLLM(url, token, bot_name)

@@ -1,0 +1,13 @@
+daily-python
+Flask
+requests
+load_dotenv
+
+imageio-ffmpeg
+imageio
+openai
+gunicorn
+flask
+flask-cors
+transformers
+sentencepiece
