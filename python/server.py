@@ -3,6 +3,11 @@ from dotenv import load_dotenv
 import os
 import requests
 
+from daily import *
+Daily.init()
+
+client = CallClient()
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -13,6 +18,18 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
+
+@app.route('/bot-join')
+def join_bot():
+    meetingURL = 'https://bhargab-sixthsens.daily.co/recruitbots-meet'
+    client.join(meeting_url=meetingURL, meeting_token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyIjoicmVjcnVpdGJvdHMtbWVldCIsImQiOiJiMzQxNmQwMC05MDQxLTQ3ZjctYTA1OS0yZTZhY2UxZGFlNjMiLCJpYXQiOjE3MjEyMDE4NDR9.3q6XXiLH9kXAtV5B69mNtaIfCnZcwqRgM1ATG8xq61I")
+    client.set_user_name("RecruitsBots")
+    return 'Bot Joined'
+
+@app.route('/bot-leve')
+def leave_bot():
+    client.leave()
+    return 'Bot Leave'
 
 @app.route('/meeting', methods=['POST'])
 def create_meeting():
