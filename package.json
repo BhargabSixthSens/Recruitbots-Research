@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "nodemon app.js",
     "py": "nodemon ./python/server.py",
-    "bot": "nodemon ./python/server.py"
+    "bot": "nodemon ./python/daily-bot-manager.py"
   },
   "dependencies": {
     "amazon-chime-sdk-js": "^3.22.0",

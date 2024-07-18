@@ -22,7 +22,7 @@ def hello_world():
 @app.route('/bot-join')
 def join_bot():
     meetingURL = 'https://bhargab-sixthsens.daily.co/recruitbots-meet'
-    client.join(meeting_url=meetingURL, meeting_token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyIjoicmVjcnVpdGJvdHMtbWVldCIsImQiOiJiMzQxNmQwMC05MDQxLTQ3ZjctYTA1OS0yZTZhY2UxZGFlNjMiLCJpYXQiOjE3MjEyMDE4NDR9.3q6XXiLH9kXAtV5B69mNtaIfCnZcwqRgM1ATG8xq61I", )
+    client.join(meeting_url=meetingURL, meeting_token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyIjoicmVjcnVpdGJvdHMtbWVldCIsIm8iOnRydWUsImQiOiJiMzQxNmQwMC05MDQxLTQ3ZjctYTA1OS0yZTZhY2UxZGFlNjMiLCJpYXQiOjE3MjEyODY0MTN9.mRl2_OUAu6i1e5ywTGzqmC28bGBcrRh_AflWw9N7X-g", )
     client.set_user_name("RecruitsBots")
     return 'Bot Joined'
 
@@ -64,6 +64,7 @@ def create_meeting():
 def create_meeting_token():
     data = request.get_json()
     name = data.get('name')
+    isOwner = data.get('isOwner')
     
     if not name:
         return jsonify({'error': 'Name is required'}), 400
@@ -75,7 +76,8 @@ def create_meeting_token():
     
     payload = {
         'properties': {
-            'room_name': name
+            'room_name': name,
+            'is_owner': isOwner
         }
     }
     
