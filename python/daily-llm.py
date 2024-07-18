@@ -1,10 +1,8 @@
 import argparse
 import logging
 import os
-import random
 import re
 import time
-import base64
 
 from threading import Thread
 
@@ -12,11 +10,6 @@ from daily import EventHandler, CallClient, Daily
 from datetime import datetime
 from dotenv import load_dotenv
 
-# from config import get_audio
-
-# from orchestrator import Orchestrator
-# from scenes.story_intro_scene import StoryIntroScene
-# from scenes.start_listening_scene import StartListeningScene
 from auth import get_meeting_token, get_room_name
 
 from deepgram import DeepgramTTS
@@ -74,10 +67,6 @@ class DailyLLM(EventHandler):
         # self.camera_thread = Thread(target=self.run_camera)
         # self.camera_thread.start()
 
-        # self.logger.info("starting orchestrator")
-        # self.orchestrator = Orchestrator(self, self.mic, self.tts, self.image_gen, self.llm, self.story_id, self.logger)
-        # self.orchestrator.enqueue(StoryIntroScene)
-        # self.orchestrator.enqueue(StartListeningScene)
 
         self.participant_left = False
         self.transcription = ""
@@ -110,11 +99,6 @@ class DailyLLM(EventHandler):
 
 
     def configure_ai_services(self):
-        # self.story_id = hex(random.getrandbits(128))[2:]
-
-        # self.tts = config.services[os.getenv("TTS_SERVICE")]()
-        # self.image_gen = config.services[os.getenv("IMAGE_GEN_SERVICE")]()
-        # self.llm = config.services[os.getenv("LLM_SERVICE")]()
         self.tts = DeepgramTTS(os.getenv("DEEPGRAM_API_KEY"), self.mic, self.logger)
     def configure_daily(self):
         Daily.init()
@@ -159,20 +143,13 @@ class DailyLLM(EventHandler):
         self.wave()
         time.sleep(2)
 
-        # don't run intro question for newcomers
-        # if not self.story_started:
-        #     #self.orchestrator.request_intro()
-        #     self.orchestrator.action()
-        #     self.story_started = True
-
     def on_participant_left(self, participant, reason):
         if len(self.client.participants()) < 2:
             self.logger.info("participant left")
             self.participant_left = True
 
     def send_transcription(self):
-        # self.orchestrator.handle_user_speech(self.transcription)
-        self.tts.text_to_speech("How can I help you?")
+        self.tts.text_to_speech("Hello, how can I help you today?")
         self.transcription = ""
         self.last_fragment_at = None
 
@@ -217,38 +194,6 @@ class DailyLLM(EventHandler):
             }
         })
 
-
-    def handle_audio(self, audio_base64):
-        """Handles base64 encoded audio data.
-
-        Args:
-            audio_base64 (str): The base64 encoded audio data.
-        """
-        self.logger.info("!!! Starting speaking")
-        start = time.time()
-
-        # Decode the base64 string to bytes
-        audio_bytes = base64.b64decode(audio_base64)
-
-        b = bytearray()
-        final = False
-        smallest_write_size = 3200
-
-        try:
-            for chunk_size in range(0, len(audio_bytes), smallest_write_size):
-                chunk = audio_bytes[chunk_size:chunk_size + smallest_write_size]
-                b.extend(chunk)
-                l = len(b) - (len(b) % smallest_write_size)
-                if l:
-                    self.mic.write_frames(bytes(b[:l]))
-                    b = b[l:]
-
-            if len(b):
-                self.mic.write_frames(bytes(b))
-        except Exception as e:
-            self.logger.error(f"Exception in handle_audio: {e}")
-        finally:
-            self.logger.info(f"!!! Finished speaking in {time.time() - start} seconds")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Daily LLM bot")

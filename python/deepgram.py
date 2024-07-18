@@ -8,7 +8,7 @@ class DeepgramTTS:
         self.logger = logger
 
     def text_to_speech(self, text):
-        url = 'https://api.deepgram.com/v1/speak?model=aura-asteria-en&encoding=linear16'
+        url = 'https://api.deepgram.com/v1/speak?model=aura-asteria-en&encoding=linear16&sample_rate=16000'
         headers = {
             'Authorization': f'Token {self.api_key}',
             'Content-Type': 'application/json'
